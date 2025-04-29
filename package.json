@@ -1,0 +1,19 @@
+{
+  "name": "automacao-web-ci-pgats",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cypress open",
+    "e2e": "cypress run"
+  },
+  "keywords": [],
+  "author": "Milena Martiniano",
+  "license": "ISC",
+  "description": "Projeto da disciplina de automacao web e CI",
+  "devDependencies": {
+    "cypress": "^13.7.3",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "import": "^0.0.6"
+  }
+}

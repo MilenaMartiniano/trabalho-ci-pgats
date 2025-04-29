@@ -1,0 +1,46 @@
+# CI de Nível 01 - Disparo manual a partir de 1 clique
+
+name: 'Execução Manual'
+
+# Gatilho de execução manual
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Faz o checkout do código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Instala o Node.js
+      - name: Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      # Instala o Yarn globalmente
+      - name: Instalando Yarn
+        run: npm install -g yarn
+
+      # Instala as dependências do projeto
+      - name: Instalando dependências
+        run: yarn install
+
+      # Executa os testes E2E
+      - name: Executando testes E2E
+        run: yarn e2e
+
+      # Executa os testes E2E gerando relatório
+      - name: Executando testes E2E com Mochawesome Reporter
+        run: |
+          yarn e2e
+
+      # Faz o upload do relatório como artefato do GitHub Actions
+      - name: Publicar relatório de teste
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: cypress/reports/mochawesome
